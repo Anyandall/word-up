@@ -303,7 +303,12 @@ function disallowedLettersInWord(word) {
 function containsOnlyAllowedLetters(word) {
     // TODO 12
     // Return the actual answer.
+    numOfDisallowed = disallowedLettersInWord(word).length;
+    if (numOfDisallowed > 0) {
+      return false;
+    } else {
     return true;
+  }
 }
 
 /**
