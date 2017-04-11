@@ -1,6 +1,6 @@
 
 
-// ----------------- MODEL -----------------
+// ----------------- MODEL -----------------f
 
 var GAME_DURATION = 60;
 
@@ -129,8 +129,6 @@ function render() {
     $("#textbox").removeClass();
     $("span").remove(".tag.tag-sm.tag-danger.disallowed-letter");
     $("#textbox").attr("disabled", false);
-    // TODO 10
-    // Add a few things to the above code block (underneath "// clear stuff").
 
 
     // reveal the #game container
@@ -143,11 +141,12 @@ function render() {
     // TODO 11
     // Render the word submissions
 
+    var wordChips = model.wordSubmissions.map(wordSubmissionChip);
+    $("#word-submissions").append(wordChips);
+
 
     // Set the value of the textbox
     $("#textbox").val(model.currentAttempt);
-    // TODO 3
-    // Give focus to the textbox.
     $("#textbox").focus();
 
     // if the current word attempt contains disallowed letters,
