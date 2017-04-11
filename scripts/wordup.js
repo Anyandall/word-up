@@ -113,8 +113,6 @@ function render() {
     // update the score on the scoreboard
     $("#current-score").text(currentScore());
 
-    // TODO 2
-    // Update the curent time remaining on the scoreboard.
     $("#time-remaining").text(model.secondsRemaining);
 
     // if the game has not started yet, just hide the #game container and exit
@@ -128,6 +126,9 @@ function render() {
     // clear stuff
     $("#allowed-letters").empty();
     $("#word-submissions").empty();
+    $("#textbox").removeClass();
+    $("span").remove(".tag.tag-sm.tag-danger.disallowed-letter");
+    $("#textbox").attr("disabled", false);
     // TODO 10
     // Add a few things to the above code block (underneath "// clear stuff").
 
@@ -158,8 +159,6 @@ function render() {
         // show the disallowed letters underneath
         var redLetterChips = disallowedLetters.map(disallowedLetterChip);
 
-        // TODO 8
-        // append the red letter chips to the form
         $("#word-attempt-form").append(redLetterChips);
 
     }
@@ -167,9 +166,9 @@ function render() {
     // if the game is over
     var gameOver = model.secondsRemaining <= 0
     if (gameOver) {
-        // TODO 9
-        // disable the text box and clear its contents
 
+        $("#textbox").val("");
+        $("#textbox").attr("disabled", true);
     }
 }
 
@@ -239,11 +238,7 @@ $(document).ready(function() {
         render();
     });
 
-    // TODO 6
-    // Add another event handler with a callback function.
-    // When the textbox content changes,
-    // update the .currentAttempt property of the model and re-render
-    // when the form is submitted
+
     $("#textbox").on("input", function() {
       input_val = $("#textbox").val();
       model.currentAttempt = input_val;
