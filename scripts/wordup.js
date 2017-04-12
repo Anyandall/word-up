@@ -74,7 +74,7 @@ function checkIfWordIsReal(word) {
     // make an AJAX call to the Pearson API
     $.ajax({
         // TODO 13 what should the url be?
-        url: "www.todo13.com",
+        url: "http://api.pearson.com/v2/dictionaries/lasde/entries" + "?headword=" + word,
         success: function(response) {
             console.log("We received a response from Pearson!");
 
@@ -301,8 +301,6 @@ function disallowedLettersInWord(word) {
  * i.e. the word does not contain any disallowed letters
  */
 function containsOnlyAllowedLetters(word) {
-    // TODO 12
-    // Return the actual answer.
     numOfDisallowed = disallowedLettersInWord(word).length;
     if (numOfDisallowed > 0) {
       return false;
