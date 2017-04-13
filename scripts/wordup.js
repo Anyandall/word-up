@@ -377,7 +377,8 @@ function currentScore() {
 
     // TODO 20
     // return the total sum of the word scores
-    return 0;
+    scoreSum = wordScores.reduce(add, 0)
+    return scoreSum;
 }
 
 
