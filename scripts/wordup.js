@@ -345,10 +345,19 @@ function wordScore(word) {
     // Replace the empty list below.
     // Map the list of letters into a list of scores, one for each letter.
     var letterScores = [];
-
+    for (var i = 0; i < letters.length; i++) {
+      var letter = letters[i];
+      letterScores.push(letterScore(letter));
+      console.log(letter);
+      console.log(letterScore(letter));
+      console.log(letterScores);
+    }
     // return the total sum of the letter scores
-    return letterScores.reduce(add, 0);
-}
+    wordScores = letterScores.reduce(add, 0)
+
+    return wordScores;
+
+  }
 
 
 /**
