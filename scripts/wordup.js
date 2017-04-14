@@ -53,15 +53,24 @@ function addNewWordSubmission(word) {
     // Do we already have a wordSubmission with this word?
     // TODO 21
     // replace the hardcoded 'false' with the real answer
-    var alreadyUsed = false;
+    if (model.wordSubmissions.length == 0) {
+      var alreadyUsed = false;
+    } else for (var i=0; i < model.wordSubmissions.length; i++){
+      if (model.wordSubmissions[i].word == word) {
+        var alreadyUsed = true;
+        return alreadyUsed;
+      } else alreadyUsed = false;
+}
+
+
 
     // if the word is valid and hasn't already been used, add it
     if (containsOnlyAllowedLetters(word) && alreadyUsed == false) {
         model.wordSubmissions.push({ word: word });
         // and now we must also determine whether this is actually a real word
         checkIfWordIsReal(word);
+      }
     }
-}
 
 /**
  * Given a word, checks to see if that word actually exists in the dictionary.
@@ -85,11 +94,7 @@ function checkIfWordIsReal(word) {
             } else {
               isRealWord = false;
             }
-            console.log(isRealWord);
 
-
-
-            // TODO 15
             for (index = 0; index < model.wordSubmissions.length; index++) {
               if (model.wordSubmissions[index].word == word) {
                 model.wordSubmissions[index].isRealWord = isRealWord;
@@ -141,7 +146,6 @@ function render() {
     var letterChips = model.allowedLetters.map(letterChip)
     $("#allowed-letters").append(letterChips);
 
-    // TODO 11
     // Render the word submissions
 
     var wordChips = model.wordSubmissions.map(wordSubmissionChip);
@@ -205,9 +209,6 @@ function wordSubmissionChip(wordSubmission) {
     // if we know the status of this word (real word or not), then add a green score or red X
     if (wordSubmission.hasOwnProperty("isRealWord")) {
         var scoreChip = $('<span></span>').text("⟐")
-
-        // TODO 17
-        // give the scoreChip appropriate text content
         if (wordSubmission.isRealWord == true) {
           scoreChip = $('<span class="tag-sm tag-primary tag"></span>').text(" " + wordScore(wordSubmission.word))
       //    $("#scoreChip").prop("class","tag-default");
@@ -219,10 +220,8 @@ function wordSubmissionChip(wordSubmission) {
 
         wordChip.append(scoreChip);
     }
-
     return wordChip;
 }
-
 /**
  * Given a disallowed letter, returns a DOM element to display the letter
  * little red chip to display the letter
@@ -243,7 +242,6 @@ $(document).ready(function() {
         startGame();
         render();
     });
-
 
     $("#textbox").on("input", function() {
       input_val = $("#textbox").val();
@@ -283,9 +281,7 @@ var scrabblePointsForEachLetter = {
  * meaning it is not a member of the .allowedLetters list from the current model
  */
 function isDisallowedLetter(letter) {
-    // TODO 7
-    // This should return true if the letter is not an element of
-    // the .allowedLetters list in the model
+
     console.log(model.allowedLetters.indexOf(letter))
     if (model.allowedLetters.indexOf(letter) > -1) {
       return false;
